@@ -397,7 +397,9 @@ const RetroRocket = ({ missionId = 'apollo11' }: { missionId?: string | null }) 
 const Trajectory = ({ progress, missionId }: { progress: number, missionId: string | null }) => {
   const curve = useMemo(() => {
     let points: THREE.Vector3[] = [];
-    const earthStart = new THREE.Vector3(-14, 0, 0);
+    const earthCenter = new THREE.Vector3(-14, 0, 0);
+    const capeCanaveralLocal = latLongToVector3(28.39, -80.60, 6.0);
+    const earthStart = earthCenter.clone().add(capeCanaveralLocal);
 
     if (missionId === 'apollo13' || missionId === 'artemis2') {
        points = [
