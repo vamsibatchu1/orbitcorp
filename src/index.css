@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono&display=swap');
+
+:root {
+  --color-bg: #011612; /* Very dark rich green-blue */
+  --color-fg: #d1f5e8; /* Pale cyan green */
+  --color-fg-bright: #ffffff;
+  --color-fg-dim: #5c998c;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-retro: 'VT323', monospace;
+  --crt-flicker: 0.05;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  overflow: hidden;
+  text-transform: uppercase;
+  -webkit-font-smoothing: none; /* Blocky look */
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* CRT Scanline effect */
+body::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* CRT Vignette/glow */
+body::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
+  z-index: 999;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
