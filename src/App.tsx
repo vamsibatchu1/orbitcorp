@@ -394,7 +394,31 @@ const RetroRocket = ({ missionId = 'apollo11' }: { missionId?: string | null }) 
   );
 };
 
+const MissionDayText = ({ text }: { text: string }) => {
+  const textRef = useRef<any>(null);
+  useFrame((state) => {
+    if (textRef.current) {
+       textRef.current.fillOpacity = 0.4 + 0.6 * Math.abs(Math.sin(state.clock.elapsedTime * 5));
+    }
+  });
+  return (
+     <Text ref={textRef} position={[2, 1.5, 0]} fontSize={0.7} color={TERMINAL_COLOR} anchorX="left" anchorY="middle">
+       {text}
+     </Text>
+  );
+};
+
 const Trajectory = ({ progress, missionId }: { progress: number, missionId: string | null }) => {
+  const currentMission = useMemo(() => MISSIONS.find(m => m.id === missionId), [missionId]);
+  const totalDays = useMemo(() => {
+     if (!currentMission) return 8;
+     const match = currentMission.duration.match(/(\d+)\s+DAY/i);
+     return match ? parseInt(match[1]) : 8;
+  }, [currentMission]);
+
+  const currentDayNumber = Math.max(1, Math.ceil(progress * totalDays));
+  const currentDayStr = `T+ DAY ${currentDayNumber}`;
+
   const earthCenter = useMemo(() => new THREE.Vector3(-20, 0, 0), []);
   const capeCanaveralLocal = useMemo(() => latLongToVector3(28.39, -80.60, 6.0), []);
   const earthStart = useMemo(() => earthCenter.clone().add(capeCanaveralLocal), [earthCenter, capeCanaveralLocal]);
@@ -461,15 +485,21 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
       )}
       <Line points={points} color={TERMINAL_COLOR} opacity={0.4} transparent lineWidth={1} dashed dashScale={10} dashSize={1} dashOffset={-progress * 10} />
       {progress > 0 && progress < 1 && (
-        <group position={shipPos} quaternion={quaternion}>
-          <group rotation={[Math.PI/2, 0, 0]}>
-             <RetroRocket missionId={missionId} />
+        <group position={shipPos}>
+          <group quaternion={quaternion}>
+             <group rotation={[Math.PI/2, 0, 0]}>
+                <RetroRocket missionId={missionId} />
+             </group>
+             {/* Target reticle around ship */}
+             <mesh rotation={[Math.PI/2, 0, 0]}>
+               <ringGeometry args={[1.5, 1.8, 16]} />
+               <meshBasicMaterial color={TERMINAL_COLOR} wireframe />
+             </mesh>
           </group>
-          {/* Target reticle around ship */}
-          <mesh rotation={[Math.PI/2, 0, 0]}>
-            <ringGeometry args={[1.5, 1.8, 16]} />
-            <meshBasicMaterial color={TERMINAL_COLOR} wireframe />
-          </mesh>
+          {/* Active Sim Hovering Day Tracker */}
+          <Billboard follow={true}>
+             <MissionDayText text={currentDayStr} />
+          </Billboard>
         </group>
       )}
     </>
