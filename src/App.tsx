@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line, Billboard, Text } from '@react-three/drei';
 import * as THREE from 'three';
@@ -20,23 +20,6 @@ const MISSIONS = [
 
 const TERMINAL_COLOR = '#d1f5e8';
 const CRT_BG_COLOR = '#0e3a2f';
-
-const OrbitRings = ({ position, radius, count }: { position: [number, number, number], radius: number, count: number }) => {
-  return (
-    <group position={position}>
-      {Array.from({ length: count }).map((_, i) => {
-        const ringRadius = radius + (i * 2) + 2;
-        const pts = useMemo(() => {
-          const curve = new THREE.EllipseCurve(0, 0, ringRadius, ringRadius, 0, 2 * Math.PI, false, 0);
-          return curve.getPoints(64).map(p => new THREE.Vector3(p.x, 0, p.y));
-        }, [ringRadius]);
-        return (
-          <Line key={i} points={pts} color={TERMINAL_COLOR} opacity={0.3 + (i * 0.1)} transparent lineWidth={1} />
-        );
-      })}
-    </group>
-  );
-};
 
 function latLongToVector3(lat: number, lon: number, radius: number): THREE.Vector3 {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -158,7 +141,7 @@ const Earth = () => {
         {geoPts && (
           <lineSegments>
             <bufferGeometry>
-              <bufferAttribute attach="attributes-position" array={geoPts} count={geoPts.length / 3} itemSize={3} />
+              <bufferAttribute attach="attributes-position" args={[geoPts, 3]} />
             </bufferGeometry>
             <lineBasicMaterial color={TERMINAL_COLOR} transparent opacity={0.8} />
           </lineSegments>
@@ -195,7 +178,6 @@ function generateMoonCraters(radius: number, craterCount: number): Float32Array 
     const bitangent = new THREE.Vector3().crossVectors(normal, tangent).normalize();
     
     let prevPoint: THREE.Vector3 | null = null;
-    let firstPoint: THREE.Vector3 | null = null;
     
     for (let j = 0; j <= segments; j++) {
       const angle = (j / segments) * Math.PI * 2;
@@ -208,7 +190,6 @@ function generateMoonCraters(radius: number, craterCount: number): Float32Array 
         .multiplyScalar(radius);
         
       if (j === 0) {
-        firstPoint = pt;
         prevPoint = pt;
       } else {
         pts.push(prevPoint!.x, prevPoint!.y, prevPoint!.z, pt.x, pt.y, pt.z);
@@ -246,7 +227,7 @@ const Moon = () => {
         </mesh>
         <lineSegments>
           <bufferGeometry>
-            <bufferAttribute attach="attributes-position" array={craterPts} count={craterPts.length / 3} itemSize={3} />
+            <bufferAttribute attach="attributes-position" args={[craterPts, 3]} />
           </bufferGeometry>
           <lineBasicMaterial color={TERMINAL_COLOR} transparent opacity={0.6} />
         </lineSegments>
