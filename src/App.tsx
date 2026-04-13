@@ -120,9 +120,7 @@ const Earth = () => {
       });
   }, []);
 
-  useFrame(() => {
-    if (meshRef.current) meshRef.current.rotation.y += 0.001;
-  });
+  // Auto-rotation disabled per user request to allow manual OrbitControls rotation
 
   return (
     <group position={[-20, 0, 0]}>
