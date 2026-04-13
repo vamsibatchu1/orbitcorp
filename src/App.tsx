@@ -463,7 +463,10 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
        points = [
            earthStart,
            new THREE.Vector3(0, controlY, 5),
-           new THREE.Vector3(22.5, endY, endZ)
+           new THREE.Vector3(22.8, endY, endZ), // Lunar Touchdown
+           new THREE.Vector3(26, endY + 4, endZ - 4), // Lunar Ascent & Orbit Phase
+           new THREE.Vector3(0, -controlY * 0.6, 0), // Trans-Earth Injection
+           new THREE.Vector3(-18, 1.5, -2) // Splashdown on Earth
        ];
     }
     return new THREE.CatmullRomCurve3(points);
