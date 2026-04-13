@@ -395,11 +395,19 @@ const RetroRocket = ({ missionId = 'apollo11' }: { missionId?: string | null }) 
 };
 
 const Trajectory = ({ progress, missionId }: { progress: number, missionId: string | null }) => {
+  const earthCenter = useMemo(() => new THREE.Vector3(-14, 0, 0), []);
+  const capeCanaveralLocal = useMemo(() => latLongToVector3(28.39, -80.60, 6.0), []);
+  const earthStart = useMemo(() => earthCenter.clone().add(capeCanaveralLocal), [earthCenter, capeCanaveralLocal]);
+  
+  const blinkRef = useRef<THREE.Mesh>(null);
+  useFrame((state) => {
+    if (blinkRef.current) {
+      (blinkRef.current.material as THREE.MeshBasicMaterial).opacity = 0.2 + 0.8 * Math.abs(Math.sin(state.clock.elapsedTime * 5));
+    }
+  });
+
   const curve = useMemo(() => {
     let points: THREE.Vector3[] = [];
-    const earthCenter = new THREE.Vector3(-14, 0, 0);
-    const capeCanaveralLocal = latLongToVector3(28.39, -80.60, 6.0);
-    const earthStart = earthCenter.clone().add(capeCanaveralLocal);
 
     if (missionId === 'apollo13' || missionId === 'artemis2') {
        points = [
@@ -445,6 +453,12 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
 
   return (
     <>
+      {missionId && (
+         <mesh ref={blinkRef} position={earthStart}>
+            <sphereGeometry args={[0.2, 16, 16]} />
+            <meshBasicMaterial color={TERMINAL_COLOR} transparent opacity={1} />
+         </mesh>
+      )}
       <Line points={points} color={TERMINAL_COLOR} opacity={0.4} transparent lineWidth={1} dashed dashScale={10} dashSize={1} dashOffset={-progress * 10} />
       {progress > 0 && progress < 1 && (
         <group position={shipPos} quaternion={quaternion}>
