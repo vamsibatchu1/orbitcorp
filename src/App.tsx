@@ -417,7 +417,6 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
   }, [currentMission]);
 
   const currentDayNumber = Math.max(1, Math.ceil(progress * totalDays));
-  const currentDayStr = `T+ DAY ${currentDayNumber}`;
 
   const earthCenter = useMemo(() => new THREE.Vector3(-20, 0, 0), []);
   const capeCanaveralLocal = useMemo(() => latLongToVector3(28.39, -80.60, 6.0), []);
@@ -478,6 +477,10 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
   const up = new THREE.Vector3(0, 1, 0);
   const quaternion = new THREE.Quaternion().setFromUnitVectors(up, tangent);
 
+  const distUnits = shipPos.distanceTo(earthCenter);
+  const distKm = Math.floor(distUnits * 8600).toLocaleString('en-US');
+  const diagnosticStr = `T+ DAY ${currentDayNumber}\nDIST: ${distKm} KM`;
+
   return (
     <>
       {missionId && (
@@ -501,7 +504,7 @@ const Trajectory = ({ progress, missionId }: { progress: number, missionId: stri
           </group>
           {/* Active Sim Hovering Day Tracker */}
           <Billboard follow={true}>
-             <MissionDayText text={currentDayStr} />
+             <MissionDayText text={diagnosticStr} />
           </Billboard>
         </group>
       )}
