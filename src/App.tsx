@@ -4,6 +4,7 @@ import { OrbitControls, Line, Billboard, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { Activity, Radio, Cpu, Settings, Target } from 'lucide-react';
 import ReidImg from './assets/astronauts/reid.jpeg';
+import ChristinaImg from './assets/astronauts/Christina.jpeg';
 import './App.css';
 
 const MISSIONS = [
@@ -658,13 +659,13 @@ const App = () => {
         </div>
 
         {activeMissionId && activeMission && (
-           <div style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 10, display: 'flex', gap: '20px', alignItems: 'flex-start', pointerEvents: 'none' }}>
+           <div style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 1001, display: 'flex', gap: '20px', alignItems: 'flex-start', pointerEvents: 'none' }}>
               {activeMissionId === 'artemis2' && (
-                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 50px)', gap: '4px', opacity: 0.9 }}>
-                    <img src={ReidImg} alt="Commander Reid" style={{ width: '50px', height: '50px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
-                    <div style={{ width: '50px', height: '50px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '0.5rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
-                    <div style={{ width: '50px', height: '50px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '0.5rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
-                    <div style={{ width: '50px', height: '50px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '0.5rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
+                 <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', opacity: 0.9 }}>
+                    <img src={ReidImg} alt="Commander Reid" style={{ width: '150px', height: '150px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                    <img src={ChristinaImg} alt="Mission Specialist Christina" style={{ width: '150px', height: '150px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                    <div style={{ width: '150px', height: '150px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
+                    <div style={{ width: '150px', height: '150px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
                  </div>
               )}
               <div style={{ fontSize: '1rem', color: 'var(--color-fg-bright)', textAlign: 'right' }}>
