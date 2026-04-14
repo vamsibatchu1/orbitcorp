@@ -662,10 +662,10 @@ const App = () => {
            <div style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 1001, display: 'flex', gap: '20px', alignItems: 'flex-start', pointerEvents: 'none' }}>
               {activeMissionId === 'artemis2' && (
                  <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', opacity: 0.9 }}>
-                    <img src={ReidImg} alt="Commander Reid" style={{ width: '150px', height: '150px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
-                    <img src={ChristinaImg} alt="Mission Specialist Christina" style={{ width: '150px', height: '150px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
-                    <div style={{ width: '150px', height: '150px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
-                    <div style={{ width: '150px', height: '150px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
+                    <img src={ReidImg} alt="Commander Reid" style={{ width: '120px', height: '120px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                    <img src={ChristinaImg} alt="Mission Specialist Christina" style={{ width: '120px', height: '120px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                    <div style={{ width: '120px', height: '120px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
+                    <div style={{ width: '120px', height: '120px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
                  </div>
               )}
               <div style={{ fontSize: '1rem', color: 'var(--color-fg-bright)', textAlign: 'right' }}>
