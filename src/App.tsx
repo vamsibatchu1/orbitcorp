@@ -4,7 +4,10 @@ import { OrbitControls, Line, Billboard, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { Activity, Radio, Cpu, Settings, Target } from 'lucide-react';
 import ReidImg from './assets/astronauts/reid.jpeg';
-import ChristinaImg from './assets/astronauts/Christina.jpeg';
+import ChristinaImg from './assets/astronauts/christina.jpeg';
+import GloverImg from './assets/astronauts/glover.jpeg';
+import HansenImg from './assets/astronauts/hansen.jpeg';
+import RiseImg from './assets/astronauts/rise.jpeg';
 import './App.css';
 
 const MISSIONS = [
@@ -661,11 +664,27 @@ const App = () => {
         {activeMissionId && activeMission && (
            <div style={{ position: 'absolute', top: '15px', right: '15px', zIndex: 1001, display: 'flex', gap: '20px', alignItems: 'flex-start', pointerEvents: 'none' }}>
               {activeMissionId === 'artemis2' && (
-                 <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', opacity: 0.9 }}>
-                    <img src={ReidImg} alt="Commander Reid" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
-                    <img src={ChristinaImg} alt="Mission Specialist Christina" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
-                    <div style={{ width: '100px', height: '100px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
-                    <div style={{ width: '100px', height: '100px', border: '1px dashed var(--color-fg-bright)', opacity: 0.3, display: 'grid', placeItems: 'center', fontSize: '1rem', color: 'var(--color-fg-bright)' }}>NO_SIG</div>
+                 <div style={{ display: 'flex', flexDirection: 'row', gap: '15px', opacity: 0.9 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                       <img src={ReidImg} alt="Wiseman" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                       <div style={{ fontSize: '0.8rem', color: 'var(--color-fg-bright)', letterSpacing: '2px' }}>WISEMAN</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                       <img src={GloverImg} alt="Glover" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                       <div style={{ fontSize: '0.8rem', color: 'var(--color-fg-bright)', letterSpacing: '2px' }}>GLOVER</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                       <img src={ChristinaImg} alt="Koch" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                       <div style={{ fontSize: '0.8rem', color: 'var(--color-fg-bright)', letterSpacing: '2px' }}>KOCH</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                       <img src={HansenImg} alt="Hansen" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                       <div style={{ fontSize: '0.8rem', color: 'var(--color-fg-bright)', letterSpacing: '2px' }}>HANSEN</div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                       <img src={RiseImg} alt="Rise" style={{ width: '100px', height: '100px', border: '1px solid var(--color-fg-bright)', filter: 'grayscale(100%) sepia(100%) hue-rotate(110deg) brightness(1.2) contrast(1.8)' }} />
+                       <div style={{ fontSize: '0.8rem', color: 'var(--color-fg-bright)', letterSpacing: '2px' }}>RISE</div>
+                    </div>
                  </div>
               )}
               <div style={{ fontSize: '1rem', color: 'var(--color-fg-bright)', textAlign: 'right' }}>
