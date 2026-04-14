@@ -728,21 +728,6 @@ const App = () => {
           </div>
         </div>
 
-        <div className="panel-section" style={{ flex: 'none' }}>
-          <div className="panel-title">MISSION TELEMETRY</div>
-          <div style={{ fontSize: '0.9rem', marginTop: '10px', color: 'var(--color-fg-bright)' }}>
-             {activeMission ? (
-               <>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom:'4px'}}><span>OPERATOR:</span> <span>{activeMission.crew}</span></div>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom:'4px'}}><span>LAUNCH:</span> <span>{activeMission.date}</span></div>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom:'4px'}}><span>VELOCITY:</span> <span>{activeMission.velocity} MPH</span></div>
-                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom:'4px'}}><span>TRACKING:</span> <span>{progress > 0 ? Math.floor(progress * 100) + '%' : 'STANDBY'}</span></div>
-               </>
-             ) : (
-               <div style={{ color: 'var(--color-fg-dim)' }}>AWAITING PROTOCOL...</div>
-             )}
-          </div>
-        </div>
 
         <div className="panel-section" style={{ flex: 'none', paddingBottom: '0' }}>
           <div className="panel-title">SIGNAL MULTIPLEX</div>
